@@ -1,5 +1,6 @@
 package mini_jeu;
 
+import java.util.Scanner;
 
 class Player {
     private String name;
@@ -8,7 +9,7 @@ class Player {
     private int defense_p;
     private int attack_p;
     boolean fin = false;
-    
+
 
 // le contructeur par defaut
     public Player(){
@@ -127,7 +128,7 @@ class Player {
             fin = true;
             System.out.println("+++++++++partie terminee++++++++++++++++++++++++++++++");
                  
-     string art = """
+     String art = """
      
      ░▒▓██████▓▒░ ░▒▓██████▓▒░░▒▓██████████████▓▒░░▒▓████████▓▒░       ░▒▓██████▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓████████▓▒░▒▓███████▓▒░  
      ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░             ░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░░▒▓█▓▒░▒▓█▓▒░      ░▒▓█▓▒░░▒▓█▓▒░ 
@@ -159,7 +160,7 @@ class Player {
         System.out.flush();   
         System.out.println("__________________________________________________________________________________");
         System.out.println("__________________________________________________________________________________");
-        System.out.println("+++++++++++++++++++++++++++++++++++++ fighter console +++++++++++++++++++++");
+        System.out.println("+++++++++++++++++++++++++++++++++++++ fighter console ++++++++++++++++++++++++++++");
         System.out.println("");
         System.out.println("                 [ 1 ] jouer contre ordinateur                                            ");
         System.out.println("                 [ 2 ] jouer a 2                                           ");
@@ -171,22 +172,55 @@ class Player {
         System.out.println("__________________________________________________________________________________");
         
     }
-    public void Affrontement(player p1, player p2){
+    public void Affrontement(){
+System.out.print("\033[H\033[2J");  
+System.out.flush();
 int cpt_tour = 1;
+String pseudo1,pseudo2;
 boolean fin = false;
-//creation des joueurs
+Player p1,p2;
+Scanner sc = new Scanner(System.in);
 
-  if (cpt_tour%2 == 0){
-    //joueur 1
-    cpt_tour++;
-  }else{
-    //joueur 2
-    cpt_tour++;
-  }
+System.out.print(" joueur 1 entre ton Pseudo ==>   ");
+pseudo1 = sc.nextLine();
+
+System.out.print("\033[H\033[2J");  
+System.out.flush();
+
+System.out.print(" joueur 1 entre ton Pseudo ==>   ");
+pseudo2 = sc.nextLine();
+
+System.out.print("\033[H\033[2J");  
+System.out.flush();
+for (int i = 0; i < 5; ++i) System.out.println();
+System.out.println(" x contre Y");
+
+//creation des joueurs
+ 
 while (fin = false){
     //jouer
+    if (cpt_tour%2 == 0){   
+        //joueur 1
+        cpt_tour++;
+      }else{
+        //joueur 2
+        cpt_tour++;
+      }
+      ;
+      }
 }
 
-    }
+    
+
+public void regles_du_jeu (){
+    System.out.print("\033[H\033[2J");  
+        System.out.flush();   
+        System.out.println("__________________________________________________________________________________");
+        System.out.println("__________________________________________________________________________________");
+        System.out.println("+++++++++++++++++++++++++++++++++++++ regle du jeu ++++++++++++++++++++++++++++");
+        System.out.println(" il s'agit d'un jeu de combat bla");
+        // appuyer sur 1 pour sortir ou sur 2 pour quitter le jeu
+        
+}
 
 }
