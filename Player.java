@@ -8,6 +8,7 @@ class Player {
     private int defense_p;
     private int attack_p;
     boolean fin = false;
+    
 
 // le contructeur par defaut
     public Player(){
