@@ -1,5 +1,4 @@
 package mini_jeu;
-
 import java.util.Scanner;
 
 class Player {
@@ -61,6 +60,12 @@ class Player {
     public void Setattack_p (int at) {
         this.attack_p = at;
     }
+
+
+
+
+
+
     //les methodes de manpulations et autres 
     // penser a une methode pour les etats score, point, manche
     public void PresentYou(){
@@ -102,7 +107,7 @@ class Player {
     }
 
     }
-    
+// ----------------------------------------------------------------------------------------------------------------------    
 
     
     public void score(Player p1, Player p2){
@@ -114,12 +119,14 @@ class Player {
         if (p2.live_P < 0 ) p2.Setlive_p(0);        
 
     System.out.println("--------------------- score ----------------------------");
+    System.out.println(p1.pseudo+" contre  "+p2.pseudo);
     System.out.println("           "+p1.pseudo+"                 "+p2.pseudo+"    ");
     System.out.println("      vie: "+p1.live_P+"            vie: "+p2.live_P+"    ");
     System.out.println("  attaque: "+p1.attack_p+"        attaque: "+p2.attack_p+"    ");
     System.out.println("  defense: "+p1.defense_p+"        defense: "+p2.defense_p+"    ");
-    p1.Game_Over(p1, p2);
+    // p1.Game_Over(p1, p2);
     }
+// -----------------------------------------------------------------------------------------------------------------------------    
     public void Game_Over(Player p1, Player p2){
         System.out.print("\033[H\033[2J");  
         System.out.flush();   
@@ -155,7 +162,11 @@ class Player {
 
         }
     }
-    public void Stating_game(){
+// -----------------------------------------------------------------------------------------------------------------
+    public static int Starting_game(){
+        Scanner sc = new Scanner(System.in);
+        int entre;
+        
         System.out.print("\033[H\033[2J");  
         System.out.flush();   
         System.out.println("__________________________________________________________________________________");
@@ -170,57 +181,151 @@ class Player {
         System.out.println("                                                                                      ");
         System.out.println(" appuyer sur l'une des touches 1,2 ou 3 pour valider une option...............            ");
         System.out.println("__________________________________________________________________________________");
-        
+        System.out.println();
+        System.out.println();
+        entre = sc.nextInt();
+        while (entre != 1 & entre != 2 & entre != 3) {
+        System.out.println("choix non disponible !!!");
+        entre = sc.nextInt();
+        }
+        return entre;
     }
-    public void Affrontement(){
-System.out.print("\033[H\033[2J");  
-System.out.flush();
-int cpt_tour = 1;
-String pseudo1,pseudo2;
-boolean fin = false;
-Player p1,p2;
-Scanner sc = new Scanner(System.in);
-
-System.out.print(" joueur 1 entre ton Pseudo ==>   ");
-pseudo1 = sc.nextLine();
-
-System.out.print("\033[H\033[2J");  
-System.out.flush();
-
-System.out.print(" joueur 1 entre ton Pseudo ==>   ");
-pseudo2 = sc.nextLine();
-
-System.out.print("\033[H\033[2J");  
-System.out.flush();
-for (int i = 0; i < 5; ++i) System.out.println();
-System.out.println(" x contre Y");
-
-//creation des joueurs
- 
-while (fin = false){
-    //jouer
-    if (cpt_tour%2 == 0){   
-        //joueur 1
-        cpt_tour++;
-      }else{
-        //joueur 2
-        cpt_tour++;
-      }
-      ;
-      }
-}
+// -------------------------------------------------------------------------------------------------
+   
 
     
 
 public void regles_du_jeu (){
     System.out.print("\033[H\033[2J");  
-        System.out.flush();   
+        System.out.flush();
+        Player p1 = new Player(); 
+        Scanner sc = new Scanner(System.in);
+        int entre,m;  
         System.out.println("__________________________________________________________________________________");
         System.out.println("__________________________________________________________________________________");
         System.out.println("+++++++++++++++++++++++++++++++++++++ regle du jeu ++++++++++++++++++++++++++++");
-        System.out.println(" il s'agit d'un jeu de combat bla");
-        // appuyer sur 1 pour sortir ou sur 2 pour quitter le jeu
+        System.out.println("             -----------------> fighter console <------------------");
+        System.out.println();
+        System.out.println();
+        System.out.println("    Il s'agit de jeu de simulation d'un combat entre 2 player, chacun player a son tour de jeu");
+        System.out.println("et a chaque tour de jeu , le player qui a la main a soit le choix d'attaquer ou de ne rien faire");
+        System.out.println("par contre des qu'un jouer choisit d'attaquer, son adversaire a le choix soit de contre-attaquer ");
+        System.out.println("soit de contrer l'attaque. les attaques de 2 points et plus coutent 1 point de vie au recepteur de");
+        System.out.println("de l'attaque. les attaques reduisent les points de vie de l'adversaire, et quelques points d'attaque");
+        System.out.println("de l'auteur de l'attaque. le combat se termine lorsqu'un des 2 players n'a plus de point de vie soit 0");
+        System.out.println("celui possedant le plus grand nombre de point de vie est declare vainqueur.");
+        System.out.println("");
+        System.out.println("BONNE CHANCE ");
+        System.out.println("Produced by DevMaes may 2K24");
+        System.out.println("");
+        System.out.println("appuyer sur [1] pour retourner au menu principal");
+        entre = sc.nextInt();
+      while (entre != 1 ) {
+        System.out.println("choix non disponible !!!");
+        entre = sc.nextInt();
+      }
+      m = Player.Starting_game();
+      
+      switch (m) {
+        case 1:
+          System.out.println("===> 1");
+        //   p1.Affrontement();
+          break;
+        case 2:
+          System.out.println("===> 2");
+          break;
+        case 3:
+          System.out.println("===> 3");
+          p1.regles_du_jeu();  
+          break;
+      
         
+         
+      }
+    }
+//   -----------------------------------------------------------------------------------------------------------      
+
+
+public void contre_deux(Player p1,Player p2){
+Scanner sc = new Scanner(System.in);    
+String pseudo1 , pseudo2;
+int cpt_tour = 1;
+int coup1,coup2,action =3;
+
+System.out.print("\033[H\033[2J");  
+System.out.flush();
+
+System.out.println("__________________________________ contre un autre joueur ____________________________________");
+System.out.println();
+System.out.println();
+System.out.print("joueur 1 entrer votre Pseudo: =>     ");
+pseudo1 = sc.nextLine();
+
+
+System.out.println();
+System.out.println();
+System.out.print("joueur 2 entrer votre Pseudo: =>     ");
+pseudo2 = sc.nextLine();
+p1.Setpseudo(pseudo1);
+p2.Setpseudo(pseudo2);
+
+System.out.print("\033[H\033[2J");  
+System.out.flush();
+
+p1.score(p1, p2);
+System.out.println();
+System.out.println();
+System.out.println();
+
+System.out.print("Action ?  [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> ");
+action = sc.nextInt();
+while(cpt_tour < 6){
+while(action == 2 & cpt_tour == 1){
+    System.out.println("Ne peut defendre car aucune attaque en cours !!!!");
+    System.out.print("Action ?  [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> ");
+action = sc.nextInt();
+}    
+if(cpt_tour == 1 || cpt_tour%2 != 0){
+
+    if(action == 1) {
+        System.out.println(p1.pseudo+" attaque a coup de: ");
+        coup1= sc.nextInt();
+        p1.attaque(coup1, p2);
+        p1.score(p1, p2);   
+    }    
+    if(action == 2) {
+        System.out.println(p1.pseudo+" defense a coup de: ");
+        coup1= sc.nextInt();
+        p1.defense(coup1, p2);
+        p1.score(p1, p2);   
+    }
+   
+    if(action == 3) System.out.println("RAS");
+    
+    cpt_tour++;
 }
+if(cpt_tour%2 == 0){
+    System.out.print("Action ?  [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> ");
+    action = sc.nextInt();
+
+    if(action == 1) {
+        System.out.println(p2.pseudo+" attaque a coup de: ");
+        coup2= sc.nextInt();
+        p2.attaque(coup2, p1);
+        p2.score(p1, p2);   
+    }    
+    if(action == 2) {
+        System.out.println(p2.pseudo+" defense a coup de: ");
+        coup2= sc.nextInt();
+        p2.defense(coup2, p1);
+        p2.score(p1, p2);   
+    }
+    cpt_tour++;
+}
+
+}
+}
+
+// ----------------------------------------------------------------------------------------------------------------
 
 }
