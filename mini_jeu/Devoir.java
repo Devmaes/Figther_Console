@@ -24,7 +24,7 @@ public class Devoir {
           System.out.println("===> 1");
           break;
         case 2:
-          System.out.println("===> 2");
+          System.out.println("contre 2");
           p.contre_deux(p1,p2);
           break;
         case 3:
@@ -36,8 +36,10 @@ public class Devoir {
          
       }
       System.out.println("vous avez choisi "+(m+1));
-      // creer un systeme de switch case pour faire le choix ici
-      // contre ordinateur sera un random juste des possibilite
+      // revoir le scenario du jeu
+      // revisiter la fonction defence
+      // revoir la variable cpt_tour
+      //voir la fonction game_over
 
 
 // 

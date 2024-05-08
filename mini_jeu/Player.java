@@ -132,7 +132,7 @@ class Player {
         System.out.flush();   
     
         if (p1.live_P == 0 || p2.live_P == 0){
-            fin = true;
+            // fin = true;
             System.out.println("+++++++++partie terminee++++++++++++++++++++++++++++++");
                  
      String art = """
