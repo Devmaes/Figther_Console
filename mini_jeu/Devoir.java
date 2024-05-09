@@ -12,7 +12,7 @@ public class Devoir {
 
             
             Player p = new Player("maes","maes88", 3,7 , 15);
-            Player p1 = new Player("maes","mas88", 3,7 , 15);
+            Player p1 = new Player("maes","mas88", 0,7 , 15);
             Player p2 = new Player("maes","mae8", 3,7 , 15);
             
             m = Player.Starting_game();
@@ -20,8 +20,9 @@ public class Devoir {
       
 
       switch (m) {
-        case 1:
+        case 1: 
           System.out.println("===> 1");
+          p.Game_Over(p1, p2);
           break;
         case 2:
           System.out.println("contre 2");
@@ -37,8 +38,7 @@ public class Devoir {
       }
       System.out.println("vous avez choisi "+(m+1));
       // revoir le scenario du jeu
-      // revisiter la fonction defence
-      // revoir la variable cpt_tour
+      // revisiter la fonction defense
       //voir la fonction game_over
 
 

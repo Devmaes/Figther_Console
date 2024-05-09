@@ -1,5 +1,6 @@
 package mini_jeu;
 import java.util.Scanner;
+import java.util.Random;
 
 class Player {
     private String name;
@@ -128,12 +129,15 @@ class Player {
     }
 // -----------------------------------------------------------------------------------------------------------------------------    
     public void Game_Over(Player p1, Player p2){
+        // boolean fin;
+       
         System.out.print("\033[H\033[2J");  
-        System.out.flush();   
+        System.out.flush();
+        // System.out.println("entree");   
     
         if (p1.live_P == 0 || p2.live_P == 0){
             // fin = true;
-            System.out.println("+++++++++partie terminee++++++++++++++++++++++++++++++");
+            System.out.println("++++++++++++++++++++++++ la partie est terminee ++++++++++++++++++++++++++++++");
                  
      String art = """
      
@@ -154,13 +158,14 @@ class Player {
                 System.out.println(art);
     
             if (p1.live_P > p2.live_P){
-                System.out.println("victoire de "+p1.pseudo);
+                System.out.println("victoire de                                   ++++>  "+p1.pseudo+" <++++       ");
             }else{
-                System.out.println("victoire de "+p2.pseudo);
+                System.out.println("victoire de                                   ++++>  "+p1.pseudo+" <++++       ");
             }
 
 
         }
+        // System.out.println("sortie");
     }
 // -----------------------------------------------------------------------------------------------------------------
     public static int Starting_game(){
@@ -277,55 +282,83 @@ System.out.println();
 System.out.println();
 System.out.println();
 
-System.out.print("Action ?  [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> ");
-action = sc.nextInt();
-while(cpt_tour < 6){
-while(action == 2 & cpt_tour == 1){
-    System.out.println("Ne peut defendre car aucune attaque en cours !!!!");
-    System.out.print("Action ?  [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> ");
-action = sc.nextInt();
-}    
-if(cpt_tour == 1 || cpt_tour%2 != 0){
 
-    if(action == 1) {
-        System.out.println(p1.pseudo+" attaque a coup de: ");
-        coup1= sc.nextInt();
-        p1.attaque(coup1, p2);
-        p1.score(p1, p2);   
-    }    
-    if(action == 2) {
-        System.out.println(p1.pseudo+" defense a coup de: ");
-        coup1= sc.nextInt();
-        p1.defense(coup1, p2);
-        p1.score(p1, p2);   
+
+while(cpt_tour < 12){
+    if (cpt_tour % 3 == 0){
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();
+        p1.score(p1, p2);
     }
-   
-    if(action == 3) System.out.println("RAS");
-    
-    cpt_tour++;
-}
-if(cpt_tour%2 == 0){
-    System.out.print("Action ?  [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> ");
+    System.out.print("{ "+p1.pseudo+" } [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> ");
     action = sc.nextInt();
-
-    if(action == 1) {
-        System.out.println(p2.pseudo+" attaque a coup de: ");
-        coup2= sc.nextInt();
-        p2.attaque(coup2, p1);
-        p2.score(p1, p2);   
+    while(action == 2 & cpt_tour == 1){
+        System.out.println("Ne peut defendre car aucune attaque en cours !!!!");
+        System.out.print("{ "+p1.pseudo+" } [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> ");
+    action = sc.nextInt();
     }    
-    if(action == 2) {
-        System.out.println(p2.pseudo+" defense a coup de: ");
-        coup2= sc.nextInt();
-        p2.defense(coup2, p1);
-        p2.score(p1, p2);   
+    if(cpt_tour == 1 || cpt_tour%2 != 0){
+
+        if(action == 1) {
+            System.out.println(p1.pseudo+" attaque a coup de: ");
+            coup1= sc.nextInt();
+            p1.attaque(coup1, p2);
+            p1.score(p1, p2);   
+        }    
+        if(action == 2) {
+            System.out.println(p1.pseudo+" defense a coup de: ");
+            coup1= sc.nextInt();
+            p1.defense(coup1, p2);
+            p1.score(p1, p2);   
+        }
+    
+        if(action == 3) System.out.println("RAS");
+        
+        cpt_tour++;
+        System.out.println("cpt_tour: "+cpt_tour);
     }
-    cpt_tour++;
-}
+    if(cpt_tour%2 == 0){
+        System.out.print("{ "+p2.pseudo+" } [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> ");
+        action = sc.nextInt();
+
+        if(action == 1) {
+            System.out.println(p2.pseudo+" attaque a coup de: ");
+            coup2= sc.nextInt();
+            p2.attaque(coup2, p1);
+            p2.score(p1, p2);   
+        }    
+        if(action == 2) {
+            System.out.println(p2.pseudo+" defense a coup de: ");
+            coup2= sc.nextInt();
+            p2.defense(coup2, p1);
+            p2.score(p1, p2);   
+        }
+        cpt_tour++;
+        System.out.println("cpt_tour: "+cpt_tour);
+    }
 
 }
 }
 
 // ----------------------------------------------------------------------------------------------------------------
-
+public void Contr_ordinateur(){
+  System.out.println("ici c'est une partie entre toi et l'ordinateur");  
+  //creation des adversaires  
+ Player  robot1 = new Player("robot1","rodrigo", 3,7 , 15);;
+ Player  robot2 = new Player("robot2","vinicus", 3,7 , 15);
+ Player  robot3 = new Player("robot3","Belligham", 3,7 , 15);
+ Player  robot4 = new Player("robot4","juselu", 3,7 , 15);
+ Player  robot5 = new Player("robot5","camavinga", 3,7 , 15);
+ int[] tab = new int[3];
+ for (int i=0; i<3;i++){
+   tab[i] = (int)(Math.random() * 6);
+ }
+ // pour augmenter les points, tout dependra de l'adversaire choisit par le challenger
+ // les adversaires utilise un meme algo de reflection
+ // l'objectif crucial de cette section sera d'ecrire l'algo de reflection de l'ordi
+ // en realite l'ordinateur l'odinateur choisit des coups qui lui feront garder le plus de points possibles
+ // gardons aussi l'eventualite qu'il peut bloquer si necessaire les coups de son adversaire 
 }
+
+
+} 
