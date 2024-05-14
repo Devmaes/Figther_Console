@@ -80,7 +80,7 @@ class Player {
             int b = this.attack_p;
             int c = p.Getdefense_p();
             int d =p.Getattack_p(); 
-            if (impact >= 2)
+            if (impact >= 4)
                 p.Setlive_p(a - 1);
             this.Setattack_p(b - impact);
             p.SetDefense_p(c- impact);
@@ -98,7 +98,7 @@ class Player {
         if (this.defense_p >= contre_impact){
 
         
-        if ( contre_impact >= 2)
+        if ( contre_impact >= 5)
             this.live_P++;
         this.defense_p -= contre_impact;
         this.attack_p++;
@@ -125,11 +125,10 @@ class Player {
     System.out.println("      vie: "+p1.live_P+"            vie: "+p2.live_P+"    ");
     System.out.println("  attaque: "+p1.attack_p+"        attaque: "+p2.attack_p+"    ");
     System.out.println("  defense: "+p1.defense_p+"        defense: "+p2.defense_p+"    ");
-    // p1.Game_Over(p1, p2);
+    // fonction de state de game over
     }
 // -----------------------------------------------------------------------------------------------------------------------------    
     public void Game_Over(Player p1, Player p2){
-        // boolean fin;
        
         System.out.print("\033[H\033[2J");  
         System.out.flush();
@@ -341,24 +340,84 @@ while(cpt_tour < 12){
 }
 
 // ----------------------------------------------------------------------------------------------------------------
-public void Contr_ordinateur(){
-  System.out.println("ici c'est une partie entre toi et l'ordinateur");  
+public void Contr_ordinateur(Player p){
+  Scanner sc = new Scanner(System.in); 
+  int rep;
+    
+  
+System.out.print("\033[H\033[2J");  
+System.out.flush();
+
+System.out.println("__________________________________ contre l'ordinateur  ____________________________________");
+System.out.println();
+System.out.println();
+ 
+  System.out.println("     veillez choisir votre adversaire      ");
+  System.out.println();
+  System.out.println();
+  System.out.println("  [1] RODRIGO");
+  System.out.println("  [2] JOSELU");
+  System.out.println("  [3] BELLIGHAM");
+  System.out.println("  [4] CAMAVINGA");
+  System.out.println("  [5] VINICIUS");
+  System.out.println(); 
   //creation des adversaires  
- Player  robot1 = new Player("robot1","rodrigo", 3,7 , 15);;
- Player  robot2 = new Player("robot2","vinicus", 3,7 , 15);
+ Player  robot1 = new Player("robot1","Rodrigo", 3,7 , 15);;
+ Player  robot2 = new Player("robot2","Jeselu", 3,7 , 15);
  Player  robot3 = new Player("robot3","Belligham", 3,7 , 15);
- Player  robot4 = new Player("robot4","juselu", 3,7 , 15);
- Player  robot5 = new Player("robot5","camavinga", 3,7 , 15);
+ Player  robot4 = new Player("robot4","Camavinga", 3,7 , 15);
+ Player  robot5 = new Player("robot5","Vinicius", 3,7 , 15);
  int[] tab = new int[3];
+ Player[] robot = new Player[5];
+ robot[0]= robot1;
+ robot[1]= robot2;
+ robot[2]= robot3;
+ robot[3]= robot4;
+ robot[4]= robot5;
+
  for (int i=0; i<3;i++){
    tab[i] = (int)(Math.random() * 6);
  }
+ rep = sc.nextInt();
+ while (rep != 1 & rep != 2 & rep != 3 & rep != 4 & rep != 5 ) {
+    System.out.println("choix non disponible !!!");
+    rep = sc.nextInt();
+   
+  }
+
+   rep--;
+   if(rep == 0  || rep == 1 || rep == 3 || rep == 2 ){
+    robot[rep].Setattack_p(robot[rep].attack_p  + tab[2]+ 2);
+    robot[rep].SetDefense_p(robot[rep].attack_p  + tab[1]);
+    robot[rep].live_P++;
+   }
+   if(rep == 2 || rep == 4){
+    robot[rep].SetDefense_p(robot[rep].attack_p  + tab[1]+ 4);
+    robot[rep].live_P++;
+   }
+System.out.print("\033[H\033[2J");  
+System.out.flush();
+System.out.println();
+p.score(p, robot[rep]);
+
+
+
+
+
  // pour augmenter les points, tout dependra de l'adversaire choisit par le challenger
  // les adversaires utilise un meme algo de reflection
  // l'objectif crucial de cette section sera d'ecrire l'algo de reflection de l'ordi
  // en realite l'ordinateur l'odinateur choisit des coups qui lui feront garder le plus de points possibles
  // gardons aussi l'eventualite qu'il peut bloquer si necessaire les coups de son adversaire 
 }
+// ------------------------------------------------------------------------------------------------------------------------------------------------
+public int ordi_coup(Player ordi, Player p){
+int coup = 0;
 
+
+
+
+    return coup;
+}
 
 } 
