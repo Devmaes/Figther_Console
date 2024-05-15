@@ -3,11 +3,10 @@ import java.util.Scanner;
 
 public class Devoir {
     
-    
-    public static void main(String[] args) {
-      Scanner sc = new Scanner(System.in);
-      int m;
-      String pseudo_j; 
+         public static void main(String[] args) {
+            Scanner sc = new Scanner(System.in);
+            int m;
+            String pseudo_j; 
             System.out.println();
             System.out.println();
 
