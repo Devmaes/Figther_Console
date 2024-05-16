@@ -12,7 +12,7 @@ public class Devoir {
 
             
             Player p = new Player("maes","maes88", 3,7 , 15);
-            Player p1 = new Player("maes","mas88", 3,7 , 15);
+            Player p1 = new Player("maes","mas88", 0,7 , 15);
             Player p2 = new Player("maes","mae8", 3,7 , 15);
             
             m = Player.Starting_game();
@@ -22,6 +22,7 @@ public class Devoir {
       switch (m) {
         case 1: 
           System.out.println("===> 1");
+          p.Game_Over(p1, p2);
           System.out.print("joueur  entrer votre Pseudo: =>     ");
           pseudo_j= sc.nextLine();
           p.Setpseudo(pseudo_j);

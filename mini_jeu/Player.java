@@ -126,6 +126,7 @@ class Player {
     System.out.println("  attaque: "+p1.attack_p+"        attaque: "+p2.attack_p+"    ");
     System.out.println("  defense: "+p1.defense_p+"        defense: "+p2.defense_p+"    ");
     // fonction de state de game over
+    // p1.Game_Over(p1, p2);
     }
 // -----------------------------------------------------------------------------------------------------------------------------    
     public void Game_Over(Player p1, Player p2){
@@ -150,7 +151,6 @@ class Player {
                                                                                                                              
                                                                                                                              
              
-    
     
                  """;
             
@@ -398,12 +398,11 @@ System.out.println();
     robot[rep].SetDefense_p(robot[rep].attack_p  + tab[1]+ 4);
     robot[rep].live_P++;
    }
+   //combat
 while(true){ 
-    if (cpt_tour%4 == 0) {
+    if (cpt_tour == 4) {
         System.out.print("\033[H\033[2J");  
         System.out.flush();
-
-
     } 
 System.out.println();
 p.score(robot[rep], p);
@@ -441,18 +440,18 @@ if(cpt_tour == 1 || cpt_tour%2 != 0){
 }
 
 p.score(p, robot[rep]);
-System.out.print("{ "+robot[rep]+" } [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> ");
+System.out.print("{ "+robot[rep].Getpseudo()+" } [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> ");
 action = ordi_action(robot[rep], p, action, cpt_tour);
 System.out.print(action);
 if(action == 1) {
-    System.out.println(robot[rep]+" attaque a coup de: ");
+    System.out.println(robot[rep].Getpseudo()+" attaque a coup de: ");
     coup2 = ordi_coup(robot[rep], p, action, cpt_tour);
     robot[rep].attaque(coup2, p);
     p.score(p, robot[rep]);   
 }  
 
 if(action == 2) {
-    System.out.println(robot[rep]+" defense a coup de: ");
+    System.out.println(robot[rep].Getpseudo()+" defense a coup de: ");
     coup2 = ordi_coup(robot[rep], p, action, cpt_tour);
     robot[rep].defense(coup2, p);
     p.score(p, robot[rep]);   
@@ -466,7 +465,7 @@ System.out.println("cpt_tour: "+cpt_tour);
 p.score(p, robot[rep]);
 
 }
- // pour augmenter les points, tout dependra de l'adversaire choisit par le challenger
+ // pour augmenter les points, tout  dependra de l'adversaire choisit par le challenger
  // les adversaires utilise un meme algo de reflection
  // l'objectif crucial de cette section sera d'ecrire l'algo de reflection de l'ordi
  // en realite l'ordinateur l'odinateur choisit des coups qui lui feront garder le plus de points possibles
@@ -478,14 +477,19 @@ public int ordi_action(Player ordi, Player p,int action, int cpt_tour){
 
 if (cpt_tour == 2){
     action = (int)(Math.random() * 3);
+}else{
+    action = (int)(Math.random() * 4);
 }
 
 
 
     return action;
 }
+// ----------------------------------------------------------------------------------------------------------------------------------------------------
 public int ordi_coup(Player ordi, Player p,int action, int cpt_tour){
     int coup = 0;
+    if(action == 1) coup = (int)(Math.random() * p.attack_p);
+    if(action == 2) coup = (int)(Math.random() * p.defense_p);
 
     return coup; 
 }
