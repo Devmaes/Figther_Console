@@ -126,17 +126,18 @@ class Player {
     System.out.println("  attaque: "+p1.attack_p+"        attaque: "+p2.attack_p+"    ");
     System.out.println("  defense: "+p1.defense_p+"        defense: "+p2.defense_p+"    ");
     // fonction de state de game over
-    // p1.Game_Over(p1, p2);
+    p1.Game_Over(p1, p2);
     }
 // -----------------------------------------------------------------------------------------------------------------------------    
     public void Game_Over(Player p1, Player p2){
        
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();
-        // System.out.println("entree");   
+        
+        System.out.println("entree");   
     
         if (p1.live_P == 0 || p2.live_P == 0){
             // fin = true;
+            System.out.print("\033[H\033[2J");  
+            System.out.flush();
             System.out.println("++++++++++++++++++++++++ la partie est terminee ++++++++++++++++++++++++++++++");
                  
      String art = """
@@ -164,7 +165,7 @@ class Player {
 
 
         }
-        // System.out.println("sortie");
+        System.out.println("sortie");
     }
 // -----------------------------------------------------------------------------------------------------------------
     public static int Starting_game(){
@@ -340,7 +341,7 @@ while(cpt_tour < 12){
 }
 
 // ----------------------------------------------------------------------------------------------------------------
-public void Contr_ordinateur(Player p){
+public void  Contr_ordinateur(Player p){
   Scanner sc = new Scanner(System.in); 
   int rep;
   int cpt_tour = 1;
@@ -379,7 +380,7 @@ System.out.println();
  robot[4]= robot5;
 
  for (int i=0; i<3;i++){
-   tab[i] = (int)(Math.random() * 6);
+   tab[i] = (int)(Math.random() * 7);
  }
  rep = sc.nextInt();
  while (rep != 1 & rep != 2 & rep != 3 & rep != 4 & rep != 5 ) {
@@ -398,73 +399,85 @@ System.out.println();
     robot[rep].SetDefense_p(robot[rep].attack_p  + tab[1]+ 4);
     robot[rep].live_P++;
    }
-   //combat
-while(true){ 
-    if (cpt_tour == 4) {
-        System.out.print("\033[H\033[2J");  
-        System.out.flush();
-    } 
-System.out.println();
-p.score(robot[rep], p);
-System.out.println();
-System.out.println();
-System.out.println();
 
-//lancer directement le combat
-System.out.print("{ "+p.pseudo+" } [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> ");
-action = sc.nextInt();
-while(action == 2 & cpt_tour == 1){
-    System.out.println("Ne peut defendre car aucune attaque en cours !!!!");
+
+   //combat
+while(cpt_tour <= 30){
+        
+        
+    System.out.println();
+    p.score(robot[rep], p);
+    System.out.println();
+    System.out.println();
+    System.out.println();
+
+    //lancer directement le combat
     System.out.print("{ "+p.pseudo+" } [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> ");
     action = sc.nextInt();
-}
-if(cpt_tour == 1 || cpt_tour%2 != 0){
+    while(action == 2 & cpt_tour == 1){
+        System.out.println("Ne peut defendre car aucune attaque en cours !!!!");
+        System.out.print("{ "+p.pseudo+" } [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> ");
+        action = sc.nextInt();
+    }
+    if(cpt_tour == 1 || cpt_tour%2 != 0){
 
-    if(action == 1) {
-        System.out.println(p.pseudo+" attaque a coup de: ");
-        coup1= sc.nextInt();
-        p.attaque(coup1, robot[rep]);
-        p.score(p, robot[rep]);   
-    }    
-    if(action == 2) {
-        System.out.println(p.pseudo+" defense a coup de: ");
-        coup1= sc.nextInt();
-        p.defense(coup1, robot[rep]);
-        p.score(p, robot[rep]);   
+        if(action == 1) {
+            System.out.println(p.pseudo+" attaque a coup de: ");
+            coup1= sc.nextInt();
+            p.attaque(coup1, robot[rep]);
+            p.score(p, robot[rep]);   
+        }    
+        if(action == 2) {
+            System.out.println(p.pseudo+" defense a coup de: ");
+            coup1= sc.nextInt();
+            p.defense(coup1, robot[rep]);
+            p.score(p, robot[rep]);   
+        }
+
+        if(action == 3) {
+            System.out.println("RAS");
+            p.score(p, robot[rep]);
+        }
+        
+        cpt_tour++;
+        System.out.println("cpt_tour: "+cpt_tour);
+        action = (int) (Math.random()*3) + 1;
     }
 
-    if(action == 3) System.out.println("RAS");
-    
+    if (cpt_tour%2 == 0){
+    action = ordi_action(robot[rep], p, 3, cpt_tour);    
+    System.out.println("{ "+robot[rep].Getpseudo()+" } [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> "+action);
+
+    if(action == 1) {
+        coup2 = ordi_coup(robot[rep], p, action, cpt_tour);
+        robot[rep].attaque(coup2, p);
+        System.out.println(robot[rep].Getpseudo()+" attaque a coup de: "+coup2);
+        
+        // p.score(p, robot[rep]);   
+    }  
+
+    if(action == 2) {
+        coup2 = ordi_coup(robot[rep], p, action, cpt_tour);
+        robot[rep].defense(coup2, p);
+        System.out.println(robot[rep].Getpseudo()+" defense a coup de: "+coup2);
+
+        // p.score(p, robot[rep]);   
+    }
+
+    if(action == 3) {
+        System.out.println("RAS");
+        // p.score(p, robot[rep]);
+    }
+
     cpt_tour++;
     System.out.println("cpt_tour: "+cpt_tour);
-}
 
-p.score(p, robot[rep]);
-System.out.print("{ "+robot[rep].Getpseudo()+" } [1]: attaquer    ||  [2]: defendre  || [3] rien faire ==> ");
-action = ordi_action(robot[rep], p, action, cpt_tour);
-System.out.print(action);
-if(action == 1) {
-    System.out.println(robot[rep].Getpseudo()+" attaque a coup de: ");
-    coup2 = ordi_coup(robot[rep], p, action, cpt_tour);
-    robot[rep].attaque(coup2, p);
-    p.score(p, robot[rep]);   
-}  
-
-if(action == 2) {
-    System.out.println(robot[rep].Getpseudo()+" defense a coup de: ");
-    coup2 = ordi_coup(robot[rep], p, action, cpt_tour);
-    robot[rep].defense(coup2, p);
-    p.score(p, robot[rep]);   
-}
-
-if(action == 3) System.out.println("RAS");
-
-cpt_tour++;
-System.out.println("cpt_tour: "+cpt_tour);
-
-p.score(p, robot[rep]);
-
-}
+    }
+    if (cpt_tour%6 == 0 ) {
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();
+    }
+    }
  // pour augmenter les points, tout  dependra de l'adversaire choisit par le challenger
  // les adversaires utilise un meme algo de reflection
  // l'objectif crucial de cette section sera d'ecrire l'algo de reflection de l'ordi
@@ -473,24 +486,28 @@ p.score(p, robot[rep]);
 }
 
 // ------------------------------------------------------------------------------------------------------------------------------------------------
-public int ordi_action(Player ordi, Player p,int action, int cpt_tour){
+public int  ordi_action(Player ordi, Player p,int action, int cpt_tour){
+ 
 
-if (cpt_tour == 2){
-    action = (int)(Math.random() * 3);
-}else{
-    action = (int)(Math.random() * 4);
-}
-
-
-
-    return action;
+    if(p.live_P <= 1|| p.attack_p <= 1  ){
+        if (ordi.attack_p >= 4  ) {
+            action = 1;
+        }
+    }else{
+        action = (int) (Math.random()*3) + 1;
+    }
+    
+    return action ;
 }
 // ----------------------------------------------------------------------------------------------------------------------------------------------------
 public int ordi_coup(Player ordi, Player p,int action, int cpt_tour){
     int coup = 0;
-    if(action == 1) coup = (int)(Math.random() * p.attack_p);
-    if(action == 2) coup = (int)(Math.random() * p.defense_p);
-
+    if(action == 1) coup = (int)((Math.random() * ordi.attack_p )+ 1);
+    if(action == 2) coup = (int)((Math.random() * ordi.defense_p)+ 1); 
+    if (p.live_P <= 1) {
+        coup = (int)((Math.random() * p.attack_p )+ 4);
+    }
+    
     return coup; 
 }
 
