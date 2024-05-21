@@ -485,9 +485,10 @@ if(fin != true){
 
     }
 }
-    if (cpt_tour%5 == 0 ) {
+    if (cpt_tour%3 == 0 ) {
         System.out.print("\033[H\033[2J");  
         System.out.flush();
+        fin = p.score(p, robot[rep]);
     }
     }
  // pour augmenter les points, tout  dependra de l'adversaire choisit par le challenger
@@ -523,7 +524,7 @@ public int ordi_coup(Player ordi, Player p,int action, int cpt_tour){
     if (p.live_P <= 1) {
         coup = (int)((Math.random() * p.attack_p )+ 4);
     }else{
-        if(ordi.attack_p <= 4 & ordi.defense_p == 0  ) coup = 0;
+        if(ordi.attack_p <= 4 & ordi.defense_p == 0  ) coup = 0; 
     }
     
     System.out.println("++++++++++++++++++++++>>>>>>>>> "+coup);
