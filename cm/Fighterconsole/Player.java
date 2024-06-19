@@ -1,8 +1,8 @@
-package mini_jeu;
+package cm.Fighterconsole;
 import java.util.Scanner;
 import java.util.Random;
 
-class Player {
+public class Player {
     private String name;
     private String pseudo;
     private int live_P; 
@@ -183,15 +183,17 @@ class Player {
         System.out.println("                 [ 1 ] jouer contre ordinateur                                            ");
         System.out.println("                 [ 2 ] jouer a 2                                           ");
         System.out.println("                 [ 3 ] consulter les regles                                            ");
+        System.out.println("                 [ 4 ] consulter les records                                            ");
+        System.out.println("                 [ 5 ] Quitter le jeu                                          ");
         System.out.println("                                                                                      ");
         System.out.println("                                                                                      ");
         System.out.println("                                                                                      ");
-        System.out.println(" appuyer sur l'une des touches 1,2 ou 3 pour valider une option...............            ");
+        System.out.println(" appuyer sur l'une des touches 1,2,3,4 ou 5 pour valider une option...............            ");
         System.out.println("__________________________________________________________________________________");
         System.out.println();
         System.out.println();
         entre = sc.nextInt();
-        while (entre != 1 & entre != 2 & entre != 3) {
+        while (entre != 1 & entre != 2 & entre != 3 & entre != 4 & entre != 5) {
         System.out.println("choix non disponible !!!");
         entre = sc.nextInt();
         }
@@ -236,7 +238,6 @@ public void regles_du_jeu (){
       switch (m) {
         case 1:
           System.out.println("===> 1");
-        //   p1.Affrontement();
           break;
         case 2:
           System.out.println("===> 2");
@@ -245,6 +246,12 @@ public void regles_du_jeu (){
           System.out.println("===> 3");
           p1.regles_du_jeu();  
           break;
+        case 4:
+            System.out.println("voir la liste des records");
+            break;
+        case 5:
+            System.out.println("nous vous remercions bye bye !!!!");
+            break;
       
         
          
@@ -353,8 +360,7 @@ public void  Contr_ordinateur(Player p){
   int coup1,coup2,action =3;
   boolean fin=false;
 
-    
-  
+     
 System.out.print("\033[H\033[2J");  
 System.out.flush();
 
@@ -405,7 +411,9 @@ System.out.println();
     robot[rep].SetDefense_p(robot[rep].attack_p  + tab[1]+ 4);
     robot[rep].live_P++;
    }
-
+   p.SetDefense_p(0);
+p.SetDefense_p(0);
+p.Setattack_p(20);
      
    System.out.println();
    fin = p.score(robot[rep], p);
