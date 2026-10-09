@@ -1,0 +1,21 @@
+# Compiled Java output and local IDE state
+target/
+out/
+*.class
+*.jar
+.idea/
+*.iml
+.settings/
+.project
+.classpath
+
+# Never commit local leaderboards or player preferences
+*.db
+*.db-shm
+*.db-wal
+data/
+.env
+
+# OS
+.DS_Store
+Thumbs.db
